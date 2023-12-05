@@ -10,7 +10,7 @@ FRONTEND_DIR_NAME = 'frontend'
 NGINX_DIR_NAME = 'nginx'
 DEPLOY_INFO_FILE_NAME = 'tests.yml'
 KITTYGRAM_DOMAIN_KEY = 'kittygram_domain'
-TASKI_DOMAIN_KEY = 'taski_domain'
+TASKI_DOMAIN_KEY = 'kittigram_domain'
 DOCKERFILE_NAME = 'Dockerfile'
 DOCKERHUB_USERNAME_KEY = 'dockerhub_username'
 WORKFLOW_FILE = 'kittygram_workflow.yml'
@@ -124,5 +124,5 @@ def kittygram_link_key() -> str:
 
 
 @pytest.fixture(scope='session')
-def taski_link_key() -> str:
+def kittigram_link_key() -> str:
     return TASKI_DOMAIN_KEY

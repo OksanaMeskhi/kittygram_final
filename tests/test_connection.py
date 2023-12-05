@@ -68,7 +68,7 @@ def test_link_connection(
                                link_key)
     response = _make_safe_request(link)
     cats_project_name = 'Kittygram'
-    taski_project_name = 'Taski'
+    kittigram_project_name = 'Taski'
     assert_msg_template = (
         f'Убедитесь, что по ссылке `{link}` доступен проект '
         '`{project_name}`.'
@@ -79,27 +79,27 @@ def test_link_connection(
         )
     else:
         assert_msg = assert_msg_template.format(
-            project_name=taski_project_name
+            project_name=kittigram_project_name
         )
         js_link = _get_js_link(response)
         assert js_link, assert_msg
         try:
-            taski_response = requests.get(f'{link}/{js_link}')
+            kittigram_response = requests.get(f'{link}/{js_link}')
         except requests.exceptions.ConnectionError:
             raise AssertionError(assert_msg)
-        assert taski_response.status_code == HTTPStatus.OK, assert_msg
-        assert taski_project_name in taski_response.text, assert_msg
+        assert kittigram_response.status_code == HTTPStatus.OK, assert_msg
+        assert kittigram_project_name in kittigram_response.text, assert_msg
 
 
 def test_projects_on_same_ip(
         deploy_file_info: tuple[Path, str],
         deploy_info_file_content: dict[str, str],
-        kittygram_link_key: str, taski_link_key: str
+        kittygram_link_key: str, kittigram_link_key: str
 ) -> None:
     links = [
         _get_validated_link(deploy_file_info, deploy_info_file_content,
                             link_key)
-        for link_key in (kittygram_link_key, taski_link_key)
+        for link_key in (kittygram_link_key, kittigram_link_key)
     ]
     responses = [_make_safe_request(link, stream=True) for link in links]
     ips = [
