@@ -181,6 +181,7 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         passphrase: ${{ secrets.SSH_PASSPHRASE }}
         script: |
+          sudo docker system prune -a --force
           cd kittigram
           # Выполняет pull образов с Docker Hub
           sudo docker compose -f docker-compose.production.yml pull
@@ -200,4 +201,4 @@ jobs:
       with:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
-        message: Деплой успешно выполнен!
+        message: деплой котиков
