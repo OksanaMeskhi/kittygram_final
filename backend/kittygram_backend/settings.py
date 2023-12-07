@@ -11,7 +11,7 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'django')
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['158.160.80.149', '127.0.0.1', 'infra16.ddns.net', 'localhost']
+ALLOWED_HOSTS = ['158.160.80.149', '127.0.0.1', 'kittty17.ddns.net', 'localhost']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
