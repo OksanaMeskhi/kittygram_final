@@ -14,17 +14,19 @@ services:
     image: omeskhi/kittygram_backend
     env_file: .env
     volumes:
-      - static_volume:/backend_static
+      - static:/app/backend_static/
+      - media:/app/media/
   frontend:
     image: omeskhi/kittygram_frontend
     env_file: .env
-    command: cp -r /app/build/. /frontend_static/
+    command: cp -r /app/build/. /static/
     volumes:
-      - static_volume:/frontend_static
+      - static:/static
   gateway:
     image: omeskhi/kittygram_gateway
     env_file: .env
     volumes:
-      - static_volume:/staticfiles/
+      - static:/static
+      - media:/app/media/
     ports:
       - 9000:80
