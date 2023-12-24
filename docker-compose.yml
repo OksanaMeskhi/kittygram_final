@@ -15,14 +15,15 @@ services:
     build: ./backend/
     env_file: .env
     volumes:
-      - static:/app/backend_static/
+      - static:/backend_static
       - media:/app/media/
   frontend:
     env_file: .env
     build: ./frontend/
     command: cp -r /app/build/. /static/
     volumes:
-      - static:/static
+      - static:/frontend_static
+      - media:/app/media/
   gateway:
     build: ./nginx/
     env_file: .env
@@ -31,18 +32,3 @@ services:
     volumes:
       - static:/static
       - media:/app/media/
-
-  # webserver:
-  #     image: nginx:latest
-  #     ports:
-  #       - 80:80
-  #       - 443:443
-  #     restart: always
-  #     volumes:
-  #       - ./nginx/conf/:/etc/nginx/conf.d/:ro
-  #       - ./certbot/www/:/var/www/certbot/:ro
-  # certbot:
-  #   mage: certbot/certbot:latest
-  #   volumes:
-  #     - ./certbot/www/:/var/www/certbot/:rw
-  #     - ./certbot/conf/:/etc/kittygram_final/:rw
