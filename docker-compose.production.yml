@@ -16,7 +16,7 @@ services:
     image: omeskhi/kittygram_backend
     env_file: .env
     volumes:
-      - static:/backend_static
+      - static:/app/collected_static
       - media:/media
     depends_on:
       - db
