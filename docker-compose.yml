@@ -7,25 +7,23 @@ volumes:
 
 services:
   db:
-    image: postgres:13.10
-    env_file: .env
+    image: postgres:13
+    env-file: .env
     volumes:
       - pg_data:/var/lib/postgresql/data
-
   backend:
     build: ./backend/
     env_file: .env
     volumes:
-      - static:/app/collected_static
-      - media:/media
-
+      - static:/backend_static
+      - media:/app/media/
   frontend:
     env_file: .env
     build: ./frontend/
-    command: cp -r /app/build/. /frontend_static/
+    command: cp -r /app/build/. /static/
     volumes:
       - static:/frontend_static
-
+      - media:/app/media/
   gateway:
     build: ./nginx/
     env_file: .env
@@ -33,4 +31,18 @@ services:
       - 9000:80
     volumes:
       - static:/static
-      - media:/media
+      - media:/app/media/
+  webserver:
+      image: nginx:latest
+      ports:
+        - 80:80
+        - 443:443
+      restart: always
+      volumes:
+        - ./nginx/conf/:/etc/nginx/conf.d/:ro
+        - ./certbot/www/:/var/www/certbot/:ro
+  certbot:
+    mage: certbot/certbot:latest
+    volumes:
+      - ./certbot/www/:/var/www/certbot/:rw
+      - ./certbot/conf/:/etc/kittygram_final/:rw
