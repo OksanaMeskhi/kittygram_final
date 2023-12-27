@@ -8,7 +8,7 @@ volumes:
 services:
   db:
     image: postgres:13
-    env-file: .env
+    env_file: .env
     volumes:
       - pg_data:/var/lib/postgresql/data
   backend:
@@ -41,8 +41,8 @@ services:
       volumes:
         - ./nginx/conf/:/etc/nginx/conf.d/:ro
         - ./certbot/www/:/var/www/certbot/:ro
-  certbot:
-    mage: certbot/certbot:latest
-    volumes:
-      - ./certbot/www/:/var/www/certbot/:rw
-      - ./certbot/conf/:/etc/kittygram_final/:rw
+  # certbot:
+  #   mage: certbot/certbot:latest
+  #   volumes:
+  #     - ./certbot/www/:/var/www/certbot/:rw
+  #     - ./certbot/conf/:/etc/kittygram_final/:rw
