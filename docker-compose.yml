@@ -2,7 +2,6 @@ version: '3'
 
 volumes:
   pg_data:
-  pg_run:
   static:
   media:
 
@@ -12,14 +11,12 @@ services:
     env_file: .env
     volumes:
       - pg_data:/var/lib/postgresql/data
-      - pg_run:/var/run/postgresql/
   backend:
     build: ./backend/
     env_file: .env
     volumes:
       - static:/backend_static
       - media:/app/media/
-      - pg_run:/var/run/postgresql/
   frontend:
     env_file: .env
     build: ./frontend/

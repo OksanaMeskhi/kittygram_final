@@ -2,7 +2,6 @@ version: '3'
 
 volumes:
   pg_data_production:
-  pg_run_production:
   static_volume:
   media_volume:
 
@@ -12,7 +11,6 @@ services:
     env_file: .env
     volumes:
       - pg_data_production:/var/lib/postgresql/data
-      - pg_run_production:/var/run/postgresql/
 
   backend:
     image: omeskhi/kittigram_backend
@@ -20,7 +18,6 @@ services:
     volumes:
       - static_volume:/backend_static
       - media_volume:/app/media/
-      - pg_run_production:/var/run/postgresql/
 
   frontend:
     image: omeskhi/kittigram_frontend
