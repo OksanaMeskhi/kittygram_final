@@ -10,7 +10,7 @@
 ```yaml
 repo_owner: ваш_логин_на_гитхабе
 kittygram_domain: полная ссылка (https://доменное_имя) на ваш проект Kittygram
-kittigram_domain: полная ссылка (https://доменное_имя) на ваш проект Taski
+kittygram_domain: полная ссылка (https://доменное_имя) на ваш проект Taski
 dockerhub_username: ваш_логин_на_докерхабе
 ```
 

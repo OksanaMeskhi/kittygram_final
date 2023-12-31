@@ -80,7 +80,7 @@ jobs:
             # Для каждого пересобранного образа
             # устанавливаем тег latest, чтобы потом
             # на сервере и в docker-compose.yml не указывать версию
-            tags: ${{ secrets.DOCKER_USERNAME }}/kittigram_backend:latest
+            tags: ${{ secrets.DOCKER_USERNAME }}/kittygram_backend:latest
 
   frontend_tests:
     runs-on: ubuntu-latest
@@ -125,7 +125,7 @@ jobs:
         with:
           context: ./frontend/
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/kittigram_frontend:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/kittygram_frontend:latest
 
   build_gateway_and_push_to_docker_hub:
     name: Push gateway Docker image to DockerHub
@@ -146,7 +146,7 @@ jobs:
           context: ./nginx/
           push: true
           # Тут вместо username должен быть ваш логин на Docker Hub
-          tags: ${{ secrets.DOCKER_USERNAME }}/kittigram_gateway:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/kittygram_gateway:latest
 
   deploy:
     runs-on: ubuntu-latest
@@ -168,7 +168,7 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         passphrase: ${{ secrets.SSH_PASSPHRASE }}
         source: "docker-compose.production.yml"
-        target: "kittigram"
+        target: "kittygram"
     - name: Executing remote ssh commands to deploy
       uses: appleboy/ssh-action@master
       with:
@@ -178,7 +178,7 @@ jobs:
         passphrase: ${{ secrets.SSH_PASSPHRASE }}
         script: |
           sudo docker system prune -a --force
-          cd kittigram
+          cd kittygram
           cat .env
           # Выполняет pull образов с Docker Hub
           sudo docker compose -f docker-compose.production.yml pull
